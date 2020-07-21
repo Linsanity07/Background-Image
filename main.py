@@ -5,7 +5,7 @@ import pygame
 pygame.init()
 
 
-clock_tick_rate=20
+clock_tick_rate=60
 
 # Open a window
 size = (800, 600)
@@ -21,8 +21,11 @@ playerimg = pygame.image.load("A Spaceship.png")
 playerx = 400
 playery = 300
 
-def player():
-  screen.blit(playerimg,(playerx,playery))
+playerx_change = 0
+playery_change = 0
+
+def player(x,y):
+  screen.blit(playerimg,(x,y))
 
 while(dead==False):
     for event in pygame.event.get():
@@ -30,7 +33,10 @@ while(dead==False):
             dead = True
 
     screen.blit(background_image, [0, 0])
-    player()
+    playerx -= 1
+    playerx += playerx_change
+
+    player(playerx, playery)
 
     pygame.display.flip()
     clock.tick(clock_tick_rate)
